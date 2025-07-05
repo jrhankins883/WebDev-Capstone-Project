@@ -1,5 +1,5 @@
 const findFaveButton = document.getElementById('find-fave');
-findFaveButton.onClick = () => {
+findFaveButton.onclick = () => {
     location.href = 'findFave.html';
 };
 const randomPicksButton = document.getElementById('random-picks');
