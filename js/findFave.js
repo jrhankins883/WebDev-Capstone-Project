@@ -1,4 +1,3 @@
-const APIKEY = '31264489254ebb16345c74bb957e0215';
 
 document.getElementById('search-btn').addEventListener('click', (event) => {
     event.preventDefault();
