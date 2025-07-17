@@ -1,3 +1,4 @@
+ // DO NOT FORGET TO REMOVE API KEY 
 
 document.getElementById('search-btn').addEventListener('click', (event) => {
     event.preventDefault();
@@ -18,25 +19,85 @@ document.getElementById('search-btn').addEventListener('click', (event) => {
 
             data.results.forEach(person => {
                 const personDiv = document.createElement('div');
+                personDiv.classList.add('person-card');
+
+                const imageHTML = person.profile_path
+                ? `<img src="https://image.tmdb.org/t/p/w200${person.profile_path}" 
+                    alt="${person.name}" 
+                    class="person-img" 
+                    data-id="${person.id}"
+                    data-name="${person.name}"
+                    data-birthday="Loading...">`
+                : `<p>No image available</p>`;
 
                 personDiv.innerHTML = `
+                    ${imageHTML}
                     <h3>${person.name}</h3>
-                    ${person.profile_path
-                        ? `<img src="https://image.tmdb.org/t/p/w200${person.profile_path}" alt="${person.name}" class="person-img" data-id="${person.id}">`
-                        : `<p>No image available</p>`
-                    }
+                    <p class="birthday" id="bday-${person.id}">Loading birthday...</p>
                 `;
 
                 resultsContainer.appendChild(personDiv);
-            });
+
+                fetch(`https://api.themoviedb.org/3/person/${person.id}?api_key=${APIKEY}`)
+                    .then(res => res.json())
+                    .then(detailData => {
+                        const bdayElem = document.getElementById(`bday-${person.id}`);
+                        const raw = detailData.birthday;
+                        const display = raw ? `Born: ${raw}` : 'Birthday: N/A';
+                        bdayElem.textContent = display;
+
+                        const personImg = document.querySelector(`img[data-id="${person.id}"]`);
+                        if (personImg) {
+                        personImg.setAttribute('data-birthday', raw || '');
+                        }
+                    })
+                    .catch(error => {
+                        const bdayElem = document.getElementById(`bday-${person.id}`);
+                        bdayElem.textContent = 'Birthday: N/A';
+                        console.error(`Error getting birthday for ${person.name}:`, error);
+                    });
+                });
 
             document.querySelectorAll('.person-img').forEach(img => {
                 img.addEventListener('click', () => {
-                    const personID = img.getAttribute('data-id');
-                    getDirectingCredits(personID);
-                });
+                const personID = img.getAttribute('data-id');
+                const name = img.getAttribute('data-name');
+                const birthday = img.getAttribute('data-birthday');
+                const imageUrl = img.getAttribute('src');
+
+                const resultsContainer = document.getElementById('results');
+                resultsContainer.innerHTML = '';
+
+                const personDetailsWrapper = document.createElement('div');
+                personDetailsWrapper.classList.add('person-details-wrapper');
+
+                const personInfo = document.createElement('div');
+                personInfo.classList.add('person-info');
+
+                const selectedImg = document.createElement('img');
+                selectedImg.src = imageUrl;
+                selectedImg.alt = name;
+                selectedImg.classList.add('selected-person-img');
+
+                const nameEl = document.createElement('h2');
+                nameEl.textContent = name;
+
+                const birthdayEl = document.createElement('p');
+                birthdayEl.textContent = `Birthday: ${birthday || 'Unknown'}`;
+
+                personInfo.appendChild(selectedImg);
+                personInfo.appendChild(nameEl);
+                personInfo.appendChild(birthdayEl);
+
+                const filmographyContainer = document.createElement('div');
+                filmographyContainer.id = 'filmography';
+                personDetailsWrapper.appendChild(personInfo);
+                personDetailsWrapper.appendChild(filmographyContainer);
+                resultsContainer.appendChild(personDetailsWrapper);
+                getDirectingCredits(personID);
             });
-        })
+        });
+    })
         .catch(error => {
             console.error('Error fetching data:', error);
         });
@@ -71,3 +132,6 @@ function getDirectingCredits(personID) {
         })
         .catch(error => console.error("Error fetching directing credits:", error));
 }
+
+
+// DO NOT FORGET TO REMOVE API KEY

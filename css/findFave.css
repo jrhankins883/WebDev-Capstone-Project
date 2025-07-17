@@ -38,6 +38,14 @@ main {
     background-color: black;
 }
 
+#results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
 #filmography {
     background-color: rgba(0, 0, 0, 0.85);
     color: white;
@@ -47,4 +55,60 @@ main {
     width: 80%;
     max-width: 800px;
     text-align: left;
+}
+
+.person-card {
+    text-align: center;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid lightgray;
+    max-width: 200px;
+    border-radius: 12px;
+    background: snow;
+}
+
+.person-img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.person-name {
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+.person-birthday {
+    font-size: 0.9rem;
+    color: darkgray;
+}
+
+.person-details-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.person-info {
+    flex: 1;
+    max-width: 250px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.selected-person-img {
+    width: 100%;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+#filmography {
+    flex: 2;
+    width: auto;
+    max-width: none;
 }
