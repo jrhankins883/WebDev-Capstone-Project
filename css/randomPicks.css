@@ -1,0 +1,15 @@
+html {
+    background-image: url('/images/small-tv.jpg'); 
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+header {
+    text-align: center;
+    background-color: black;
+    color: red;
+    border-radius: 25px;
+    width: 300px;
+    margin: 0 auto;
+}
