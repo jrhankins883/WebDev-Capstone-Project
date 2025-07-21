@@ -13,3 +13,21 @@ header {
     width: 300px;
     margin: 0 auto;
 }
+
+.instructions {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+ol {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 1rem;;
+    gap: 1rem;
+    border: 2px solid white;
+    color: red;
+    border-radius: 5px;
+
+}
