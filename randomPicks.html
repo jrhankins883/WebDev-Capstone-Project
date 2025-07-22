@@ -7,21 +7,26 @@
     <link rel="stylesheet" href="css/randomPicks.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
 </head>
-<header>
-    <h1>Let's Get Random</h1>
-</header>
+
 <body>
-    <div class="instructions">
-        <ol>
-            <li>Pick a Genre</li>
-            <li>Click "Find A Movie For me"</li>
-            <li>Select the one you'd like to watch</li>
-            <li>Don't like what you see? Click the button again and a new list will regenerate</li>
-        </ol>
+    <header>
+        <h1>REELPLAY</h1>
+    </header>
+    <div class="dropdown-menu">
+        <h3>Pick Your Genre</h3>
+        <label for="movie">Pick One
+            <select name="movie" id="random-pick">
+                <option value="action">Action</option>
+                <option value="comedy">Comedy</option>
+                <option value="horror">Horror</option>
+                <option value="sci-fi">Sci-fi</option>
+                <option value="drama">Drama</option>
+                <option value="romance">Romance</option>
+            </select>
+        </label>
     </div>
-</body>
     <script src="script.js"></script>
 </body>
 </html>
