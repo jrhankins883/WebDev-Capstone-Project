@@ -18,7 +18,7 @@ document.querySelectorAll('.genre-btn').forEach(button => {
                 const movieCard = document.createElement('div');
                 movieCard.classList.add('movie-card');
                 movieCard.innerHTML = 
-                    `<h3>${movie.title}</h3>
+                    `<img src="https://image.tmdb.org/t/p/w185${movie.poster_path}" alt="${movie.title} poster"/>
                     <p>${movie.overview || 'No description available.'}</p>
                 `;
 

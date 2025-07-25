@@ -26,6 +26,12 @@ header h1 {
     margin-left: 12rem;
 }
 
+.content-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
 .tv-screen {
     background-color: rgba(20, 20, 20, 0.85);
     padding: 2.5rem;
