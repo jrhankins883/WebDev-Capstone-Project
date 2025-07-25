@@ -65,3 +65,28 @@ header h1 {
     color: #1a1a1a;
     box-shadow: 0 0 12px #ffcc00;
 }
+
+.results-container {
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 15rem;
+    margin-left: 40rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    border-radius: 15px;
+    width: 500px;
+    min-height: 420px;
+    color: white;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+.movie-card {
+    margin-bottom: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border: 1px solid #ffcc00;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
+}
