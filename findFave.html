@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Orbitron:wght@500&family=Monoton&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -16,6 +17,14 @@
     </header>
     <main>
         <div class="search-bar">
+            <label for="role-select">Choose Entertainer Role:</label>
+            <select name="role" id="role-select">
+                <option value="acting">Actor/Actress</option>
+                <option value="directing">Director</option>
+                <option value="writing">Screenwriter</option>
+                <option value="composing">Composer</option>
+                <option value="cinematography">Cinematographer</option>
+            </select>
             <form action="" method="GET" id="search-form">
                 <input type="text" name="query" id="search-input" placeholder="Search Here">
                 <button type="submit" id="search-btn">Search</button>

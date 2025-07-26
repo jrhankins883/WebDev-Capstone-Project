@@ -18,7 +18,7 @@ h1 {
     font-family: 'Limelight', sans-serif;
     font-size: 2.0rem;
     font-style: normal;
-    font-weight: light;
+    font-weight: 300;
 }
 
 main {
@@ -29,13 +29,32 @@ main {
 }
 
 .search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
     border: 5px solid red;
-    border-radius: 70px;
-    text-align: center;
-    padding: 70px;
-    margin: 0 auto;
-    width: 500px;
-    background-color: black;
+    border-radius: 999px;
+    padding: 1rem 2rem;
+    margin: 2rem auto;
+    max-width: 700px;
+    gap: 1rem;
+}
+
+#role-select {
+  background: gold;
+  color: #000;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif; 
+  border: 3px solid red;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  box-shadow: 
+    0 0 5px red, 
+    0 0 10px orange, 
+    0 0 15px red;
+  text-shadow: 1px 1px 0 #fff;
+  cursor: pointer;
 }
 
 #results {
@@ -47,17 +66,26 @@ main {
 }
 
 #filmography {
+    flex: 2;
+    max-width: none;
     background-color: rgba(0, 0, 0, 0.85);
     color: white;
     padding: 2rem;
     margin: 2rem auto;
     border-radius: 15px;
-    width: 80%;
     max-width: 800px;
     text-align: left;
 }
 
+#role-select {
+    padding: 0.5rem;
+    margin-right: 1rem;
+    font-size: 1rem;
+}
+
 .person-card {
+    display: inline-block;
+    margin: 1rem;
     text-align: center;
     margin: 1rem;
     padding: 1rem;
@@ -67,9 +95,18 @@ main {
     background: snow;
 }
 
+.person-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
 .person-img {
     width: 100%;
     border-radius: 8px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
 }
 
 .person-name {
@@ -107,8 +144,3 @@ main {
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
 
-#filmography {
-    flex: 2;
-    width: auto;
-    max-width: none;
-}
