@@ -1,4 +1,3 @@
-const  APIKEY = '969b0a3284a9fe2a3b43ff6c5cf355e3';
 const BASE_URL = 'https://api.themoviedb.org/3/discover/movie';
 
 document.querySelectorAll('.genre-btn').forEach(button => {

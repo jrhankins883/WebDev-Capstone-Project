@@ -1,5 +1,4 @@
  // DO NOT FORGET TO REMOVE API KEY 
-const APIKEY = '969b0a3284a9fe2a3b43ff6c5cf355e3';
 
 document.getElementById('search-btn').addEventListener('click', (event) => {
     event.preventDefault();
