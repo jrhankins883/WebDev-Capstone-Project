@@ -1,5 +1,4 @@
 // DO NOT FORGET TO REMOVE API KEY 
-const APIKEY = 'faa25ef148e771759c4207e04b640905';
 
 const BASE_URL = 'https://api.themoviedb.org/3/discover/movie';
 
