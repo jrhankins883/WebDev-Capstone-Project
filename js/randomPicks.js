@@ -1,5 +1,4 @@
 // DO NOT FORGET TO REMOVE API KEY 
-
 const BASE_URL = 'https://api.themoviedb.org/3/discover/movie';
 
 document.querySelectorAll('.genre-btn').forEach(button => {

@@ -3,6 +3,7 @@ html {
     background-size: cover;
     background-position: center;
     background-attachment: fixed; 
+    font-family: 'Orbitron', sans-serif;
 }
 
 header {
@@ -28,7 +29,7 @@ main {
     min-height: 65vh;
 }
 
-.search-bar {
+.dropdown-search {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -41,20 +42,45 @@ main {
     gap: 1rem;
 }
 
-#role-select {
+#role-select,
+#search-input {
   background: gold;
   color: #000;
   font-weight: bold;
   font-family: 'Orbitron', sans-serif; 
   border: 3px solid red;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
+  padding: 0.5rem 2rem;
+  border-radius: 0.8rem;
   box-shadow: 
     0 0 5px red, 
     0 0 10px orange, 
     0 0 15px red;
   text-shadow: 1px 1px 0 #fff;
   cursor: pointer;
+  text-align: center;
+}
+
+#search-input:focus {
+    outline: none;
+    background-color: gold;
+    color: black;
+}
+
+#search-btn {
+    background-color: #e50914;
+    color: gold;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bolder;
+    padding: 5px 50px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #ffd700;
+    cursor: pointer;
+    margin-top: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 #results {
