@@ -39,16 +39,11 @@ main {
     border: 5px solid red;
     border-radius: 999px;
     padding: 3rem 4rem;
-    margin-top: 9rem;
-    margin-left: -1rem;
+    margin-top: 1rem; 
+    margin-bottom: 0; 
+    margin-right: 3rem;
     max-width: 700px;
     gap: 0.3rem;
-}
-
-#role-select {
-    padding: 0.5rem;
-    margin-right: 1rem;
-    font-size: 1rem;
 }
 
 #role-select,
@@ -57,6 +52,7 @@ main {
     color: #000;
     font-weight: bold;
     font-family: 'Orbitron', sans-serif; 
+    font-size: 1rem;
     border: 3px solid red;
     padding: 0.5rem 2rem;
     border-radius: 0.8rem;
@@ -88,7 +84,7 @@ main {
     cursor: pointer;
     margin-top: 15px;
     display: block;
-    margin-left: 3.5rem;
+    margin-left: 4.5rem;
     margin-right: auto;
     transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -102,6 +98,7 @@ main {
 }
 
 #filmography {
+    display: none;
     flex: 2;
     max-width: none;
     background-color: rgba(0, 0, 0, 0.85);
@@ -115,10 +112,10 @@ main {
 
 .layout-results {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 2rem;
     justify-content: start;
-    align-items: center;
+    align-items: flex-start;
     padding: 1rem;
     margin-top: 1rem;
     max-width: 1000px;
@@ -129,6 +126,29 @@ main {
 
 .layout-results.hidden {
     display: none;
+}
+
+.reset-btn {
+    align-self: center;
+    margin-bottom: 0.5rem;
+    background: #e50914;
+    color: gold;
+    border: none;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+}
+.reset-btn:hover {
+    transform: scale(1.05);
+}
+
+.person-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .person-photo {
@@ -149,20 +169,21 @@ main {
 
 .person-card {
     display: inline-block;
-    margin: 1rem;
+    margin-right: auto;
     text-align: center;
-    margin: 1rem;
     padding: 1rem;
     border: 1px solid lightgray;
     max-width: 200px;
     border-radius: 12px;
     background: snow;
+    cursor: pointer;
 }
 
 .person-card:hover {
     transform: scale(1.05);
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
     transition: all 0.3s ease-in-out;
+    transform: scale(1.05);
 }
 
 .person-img {

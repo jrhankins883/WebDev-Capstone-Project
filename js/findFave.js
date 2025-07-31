@@ -1,62 +1,127 @@
 // REMOVE API KEY REMOVE API KEY REMOVE API KEY!!!!!!!!!!!!!!!
-const BASE_URL = 'https://api.themoviedb.org/3/search/person';
+const BASE_URL = 'https://api.themoviedb.org/3';
 
+const roleJobMap = {
+    acting: 'cast',
+    directing: 'Director',
+    writing: ['Writer', 'Writing', 'Screenplay', 'Story'],
+};
 
-document.addEventListener('DOMContentLoaded', () => {
-    const searchBtn = document.getElementById('search-btn');
-    const searchInput = document.getElementById('search-input');
-    const roleSelect = document.getElementById('role-select');
-    const layoutResults = document.querySelector('.layout-results');
+const roleSelect = document.getElementById('role-select');
+const searchForm = document.getElementById('search-form');
+const searchInput = document.getElementById('search-input');
+const resultsContainer = document.getElementById('results');
+const filmographyContainer = document.getElementById('filmography');
+const layoutResults = document.querySelector('.layout-results');
 
-    searchBtn.addEventListener('click', async (event) => {
-        event.preventDefault(); 
+searchForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    resultsContainer.innerHTML = '';
+    filmographyContainer.style.display = 'none';
+    filmographyContainer.innerHTML = '';
 
-    const searchTerm = searchInput.value.trim();
+    const query = searchInput.value.trim();
     const selectedRole = roleSelect.value;
 
-    if (!searchTerm) {
+    if (!query) {
         alert('Please enter a name to search.');
         return;
     }
 
     try {
-        const response = await fetch(`${BASE_URL}?api_key=${APIKEY}&query=${encodeURIComponent(searchTerm)}`);
+        const searchUrl = `${BASE_URL}/search/person?api_key=${APIKEY}&query=${encodeURIComponent(query)}`;
+        const response = await fetch(searchUrl);
+        const searchData = await response.json();
+
+        if (!searchData.results || searchData.results.length === 0) {
+            resultsContainer.innerHTML = '<p>No person found with that name.</p>';
+            filmographyContainer.innerHTML = '';
+            return;
+        }
+
+        const person = searchData.results[0];
+        displayPerson(person);
+    } catch (error) {
+        console.error('Error fetching person:', error);
+        resultsContainer.innerHTML = '<p>Error fetching data.</p>';
+        filmographyContainer.innerHTML = '';
+    }
+});
+
+function displayPerson(person) {
+    const imgUrl = person.profile_path
+        ? `https://image.tmdb.org/t/p/w300${person.profile_path}`
+        : 'https://via.placeholder.com/300x450?text=No+Image';
+
+    resultsContainer.innerHTML = `
+        <div class="person-container">
+            <button id="reset-btn" class="reset-btn">Reset</button>
+            <div class="person-card">
+                <img src="${imgUrl}" alt="${person.name}" class="person-img" id="person-photo" loading="lazy">
+                <h2 class="person-name">${person.name}</h2>
+                <p>Popularity: ${person.popularity ? person.popularity.toFixed(1) : 'N/A'}</p>
+            </div>
+        </div>
+    `;
+
+    layoutResults.classList.remove('hidden');
+
+    document.getElementById('person-photo').addEventListener('click', () => {
+        document.getElementById('person-photo').classList.add('slide-left');
+        getFilmography(person.id, roleSelect.value);
+});
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+    searchInput.value = '';                 
+    resultsContainer.innerHTML = '';        
+    filmographyContainer.innerHTML = '';    
+    filmographyContainer.style.display = 'none';
+    layoutResults.classList.add('hidden');  
+});
+}
+
+async function getFilmography(personId, roleKey) {
+    const jobCriteria = roleJobMap[roleKey];
+    const creditsUrl = `${BASE_URL}/person/${personId}/combined_credits?api_key=${APIKEY}`;
+
+    try {
+        filmographyContainer.style.display = 'none';
+        const response = await fetch(creditsUrl);
         const data = await response.json();
 
-        if (data.results && data.results.length > 0) {
-            const person = data.results[0]; 
-            const personName = person.name;
-            const personPhotoUrl = person.profile_path
-                ? `https://image.tmdb.org/t/p/w300${person.profile_path}`
-                : 'https://via.placeholder.com/300x450?text=No+Image';
+        let filteredCredits = [];
 
-        layoutResults.innerHTML = '';
-
-        const img = document.createElement('img');
-        img.src = personPhotoUrl;
-        img.alt = personName;
-        img.classList.add('person-photo');
-
-        layoutResults.appendChild(img);
-        layoutResults.classList.remove('hidden');
-
-        img.addEventListener('click', () => {
-            img.classList.add('slide-left');
-
-            if (!document.querySelector('.filmography')) {
-                const filmographyDiv = document.createElement('div');
-                filmographyDiv.classList.add('filmography');
-                filmographyDiv.textContent = `${personName}`;
-
-            layoutResults.appendChild(filmographyDiv);
-            }
-        });
-            } else {
-                alert('No results found. Try another name.');
+        if (roleKey === 'acting') {
+            filteredCredits = (data.cast || []).filter(credit => credit.media_type === 'movie');
+        } else {
+            filteredCredits = (data.crew || []).filter(credit => {
+                const isMovie = credit.media_type === 'movie';
+                if (Array.isArray(jobCriteria)) {
+                    return jobCriteria.includes(credit.job) && isMovie;
+                } else {
+                    return credit.job === jobCriteria && isMovie;
+                }
+            });
         }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                alert('Something went wrong. Try again later.');
+
+        if (filteredCredits.length === 0) {
+            filmographyContainer.innerHTML = `<p>No ${roleKey} credits found.</p>`;
+            return;
+        }
+
+        const creditList = filteredCredits
+            .sort((a, b) => (b.release_date || b.first_air_date || '').localeCompare(a.release_date || a.first_air_date || ''))
+            .map(credit => `<li>${credit.title || credit.name} (${(credit.release_date || credit.first_air_date || 'N/A').slice(0, 4)})</li>`)
+            .join('');
+
+        filmographyContainer.innerHTML = `
+            <h3>${roleKey.charAt(0).toUpperCase() + roleKey.slice(1)} Filmography:</h3>
+            <ul>${creditList}</ul>
+        `;
+
+        filmographyContainer.style.display = 'block';
+    } catch (error) {
+        console.error('Error fetching credits:', error);
+        filmographyContainer.innerHTML = '<p>Error loading filmography.</p>';
     }
-  });
-});
+}
