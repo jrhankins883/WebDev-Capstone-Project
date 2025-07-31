@@ -1,128 +1,63 @@
-// DO NOT FORGET TO REMOVE API KEY 
+// REMOVE API KEY REMOVE API KEY REMOVE API KEY!!!!!!!!!!!!!!!
+const APIKEY = '9bec35a7b18ff6e8f4d5ff7d448782bc';
+const BASE_URL = 'https://api.themoviedb.org/3/search/person';
 
-const form = document.getElementById('search-form');
-const searchInput = document.getElementById('search-input');
-const resultsDiv = document.getElementById('results');
-const filmographyDiv = document.getElementById('filmography');
-const roleSelect = document.getElementById('role-select');
 
-const roleJobMap = {
-    acting: 'cast',
-    directing: 'Director',
-    writing: ['Writer', 'Screenplay', 'Story'],
-    composing: ['Original Music Composer', 'Music'],
-    cinematography: 'Director of Photography'
-};
+document.addEventListener('DOMContentLoaded', () => {
+    const searchBtn = document.getElementById('search-btn');
+    const searchInput = document.getElementById('search-input');
+    const roleSelect = document.getElementById('role-select');
+    const layoutResults = document.querySelector('.layout-results');
 
-function capitalize(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-}
+    searchBtn.addEventListener('click', async (event) => {
+        event.preventDefault(); 
 
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const query = searchInput.value.trim();
+    const searchTerm = searchInput.value.trim();
     const selectedRole = roleSelect.value;
 
-    if (!query) return;
-
-    const url = `https://api.themoviedb.org/3/search/person?api_key=${APIKEY}&query=${encodeURIComponent(query)}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    const people = data.results;
-
-    resultsDiv.innerHTML = '';
-    filmographyDiv.innerHTML = '';
-
-    if (people.length === 0) {
-        resultsDiv.innerHTML = `<p>No results found for "${query}"</p>`;
+    if (!searchTerm) {
+        alert('Please enter a name to search.');
         return;
     }
 
-    people.forEach(person => {
-        if (!person.profile_path) return;
+    try {
+        const response = await fetch(`${BASE_URL}?api_key=${APIKEY}&query=${encodeURIComponent(searchTerm)}`);
+        const data = await response.json();
 
-        const card = document.createElement('div');
-        card.classList.add('person-card');
+        if (data.results && data.results.length > 0) {
+            const person = data.results[0]; 
+            const personName = person.name;
+            const personPhotoUrl = person.profile_path
+                ? `https://image.tmdb.org/t/p/w300${person.profile_path}`
+                : 'https://via.placeholder.com/300x450?text=No+Image';
+
+        layoutResults.innerHTML = '';
 
         const img = document.createElement('img');
-        img.src = `https://image.tmdb.org/t/p/w200${person.profile_path}`;
-        img.alt = person.name;
+        img.src = personPhotoUrl;
+        img.alt = personName;
+        img.classList.add('person-photo');
+
+        layoutResults.appendChild(img);
+        layoutResults.classList.remove('hidden');
+
         img.addEventListener('click', () => {
-            showSelectedPerson(person);
-            getCreditsByRole(person.id, selectedRole);
-    });
+            img.classList.add('slide-left');
 
-        const name = document.createElement('h3');
-        name.textContent = person.name;
+            if (!document.querySelector('.filmography')) {
+                const filmographyDiv = document.createElement('div');
+                filmographyDiv.classList.add('filmography');
+                filmographyDiv.textContent = `${personName}`;
 
-        card.appendChild(img);
-        card.appendChild(name);
-        resultsDiv.appendChild(card);
-    });
+            layoutResults.appendChild(filmographyDiv);
+            }
+        });
+            } else {
+                alert('No results found. Try another name.');
+        }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                alert('Something went wrong. Try again later.');
+    }
+  });
 });
-
-function getCreditsByRole(personID, selectedRole) {
-    fetch(`https://api.themoviedb.org/3/person/${personID}/movie_credits?api_key=${APIKEY}`)
-        .then(res => res.json())
-        .then(data => {
-        const jobType = roleJobMap[selectedRole];
-        let credits = [];
-        
-        if (Array.isArray(jobType)) {
-            credits = data.crew.filter(credit => jobType.includes(credit.job));
-        } else if (jobType === 'cast') {
-            credits = data.cast;
-        } else {
-            credits = data.crew.filter(credit => credit.job === jobType);
-        }
-
-        credits.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
-
-        if (credits.length === 0) {
-            filmographyDiv.innerHTML = `<p>No ${capitalize(selectedRole)} credits found.</p>`;
-            return;
-        }
-
-        const list = document.createElement('ul');
-        credits.forEach(movie => {
-            const item = document.createElement('li');
-            item.textContent = `${movie.title} (${movie.release_date || 'N/A'})`;
-            list.appendChild(item);
-        });
-
-        filmographyDiv.innerHTML = `<h2>${capitalize(selectedRole)} Filmography</h2>`;
-        filmographyDiv.appendChild(list);
-        })
-        .catch(error => {
-        console.error(`Error fetching ${selectedRole} credits:`, error);
-        filmographyDiv.innerHTML = `<p>Something went wrong fetching ${capitalize(selectedRole)} credits.</p>`;
-        });
-}
-
-function showSelectedPerson(person) {
-    resultsDiv.innerHTML = ''; 
-
-    const wrapper = document.createElement('div');
-    wrapper.classList.add('person-details-wrapper');
-
-    const info = document.createElement('div');
-    info.classList.add('person-info');
-
-    const selectedImg = document.createElement('img');
-    selectedImg.src = `https://image.tmdb.org/t/p/w300${person.profile_path}`;
-    selectedImg.alt = person.name;
-    selectedImg.classList.add('selected-person-img');
-
-    const name = document.createElement('h2');
-    name.textContent = person.name;
-
-    info.appendChild(selectedImg);
-    info.appendChild(name);
-
-    const filmographyContainer = document.createElement('div');
-    filmographyContainer.id = 'filmography';
-
-    wrapper.appendChild(info);
-    wrapper.appendChild(filmographyContainer);
-    resultsDiv.appendChild(wrapper);
-}

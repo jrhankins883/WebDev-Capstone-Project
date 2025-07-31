@@ -27,37 +27,47 @@ main {
     justify-content: center;
     align-items: center;
     min-height: 65vh;
+    flex-direction: column;
+    position: relative;
 }
 
 .dropdown-search {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background: black;
     border: 5px solid red;
     border-radius: 999px;
-    padding: 1rem 2rem;
-    margin: 2rem auto;
+    padding: 3rem 4rem;
+    margin-top: 9rem;
+    margin-left: -1rem;
     max-width: 700px;
-    gap: 1rem;
+    gap: 0.3rem;
+}
+
+#role-select {
+    padding: 0.5rem;
+    margin-right: 1rem;
+    font-size: 1rem;
 }
 
 #role-select,
 #search-input {
-  background: gold;
-  color: #000;
-  font-weight: bold;
-  font-family: 'Orbitron', sans-serif; 
-  border: 3px solid red;
-  padding: 0.5rem 2rem;
-  border-radius: 0.8rem;
-  box-shadow: 
-    0 0 5px red, 
-    0 0 10px orange, 
-    0 0 15px red;
-  text-shadow: 1px 1px 0 #fff;
-  cursor: pointer;
-  text-align: center;
+    background: gold;
+    color: #000;
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif; 
+    border: 3px solid red;
+    padding: 0.5rem 2rem;
+    border-radius: 0.8rem;
+    box-shadow: 
+        0 0 5px red, 
+        0 0 10px orange, 
+        0 0 15px red;
+    text-shadow: 1px 1px 0 #fff;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 4rem;
 }
 
 #search-input:focus {
@@ -78,7 +88,7 @@ main {
     cursor: pointer;
     margin-top: 15px;
     display: block;
-    margin-left: auto;
+    margin-left: 3.5rem;
     margin-right: auto;
     transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -103,10 +113,38 @@ main {
     text-align: left;
 }
 
-#role-select {
-    padding: 0.5rem;
-    margin-right: 1rem;
-    font-size: 1rem;
+.layout-results {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: start;
+    align-items: center;
+    padding: 1rem;
+    margin-top: 1rem;
+    max-width: 1000px;
+    margin-inline: auto;
+    background-color: #111; 
+    border-radius: 10px;
+}
+
+.layout-results.hidden {
+    display: none;
+}
+
+.person-photo {
+    width: 200px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+}
+
+.person-photo.slide-left {
+    transform: translateX(-150px);
+}
+
+.filmography {
+    flex: 1;
+    padding-left: 1rem;
 }
 
 .person-card {
@@ -140,16 +178,11 @@ main {
     margin-top: 0.5rem;
 }
 
-.person-birthday {
-    font-size: 0.9rem;
-    color: darkgray;
-}
-
 .person-details-wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     margin-top: 1rem;
     padding: 1rem;
@@ -169,4 +202,3 @@ main {
     border-radius: 1rem;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
-
