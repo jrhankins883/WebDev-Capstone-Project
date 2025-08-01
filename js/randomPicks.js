@@ -1,5 +1,4 @@
 // DO NOT FORGET TO REMOVE API KEY !!!!!!!!!!!!!!!!!!!!!!!!
-
 const BASE_URL = 'https://api.themoviedb.org/3/discover/movie';
 
 document.querySelectorAll('.genre-btn').forEach(button => {
@@ -22,10 +21,14 @@ document.querySelectorAll('.genre-btn').forEach(button => {
 
                 movieCard.style.animationDelay = `${index * 0.3}s`;
                 const posterPath = movie.poster_path
-                        ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-                        : 'images/placeholder.jpg';
+                    ? `https://image.tmdb.org/t/p/w185${movie.poster_path}`
+                    : 'https://via.placeholder.com/185x278?text=No+Poster';
 
-                movieCard.innerHTML = `<img src="https://image.tmdb.org/t/p/w185${movie.poster_path}" alt="${movie.title} poster"/>`;
+                movieCard.innerHTML = `
+                    <img src="${posterPath}" alt="${movie.title} poster"/>
+                    <p>${movie.title}</p>
+                    `;
+
                 resultContainer.appendChild(movieCard);
             });
         } catch (error) {

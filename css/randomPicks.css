@@ -116,22 +116,3 @@ header h1 {
         transform: translateY(0);
     }
 }
-
-
-
-
-/*.results-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-top: 2rem;
-    margin-left: 3rem;
-    padding: 2rem;
-    border-radius: 15px;
-    width: 1000px;
-    min-height: 420px;
-    color: white;
-    gap: 1rem;
-}
