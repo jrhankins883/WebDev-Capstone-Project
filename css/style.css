@@ -55,12 +55,3 @@ button {
       hsla(0, 3%, 8%, 1) 100%
     );
 }
-
-
-/*body {
-  background: radial-gradient(circle, 
-      hsla(0, 90%, 45%, 1) 0%,
-      hsla(359, 73%, 39%, 1) 50%, 
-      hsla(0, 3%, 8%, 1) 100%
-    );
-}

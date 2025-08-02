@@ -1,5 +1,4 @@
-// REMOVE API KEY REMOVE API KEY REMOVE API KEY!!!!!!!!!!!!!!!
-const BASE_URL = 'https://api.themoviedb.org/3';
+const BASE_URL = 'http://localhost:3000/api/search';
 
 const roleJobMap = {
     acting: 'cast',
@@ -28,9 +27,16 @@ searchForm.addEventListener('submit', async (event) => {
         return;
     }
 
+    const nameRegex = /^[a-zA-Z\s'-]{2,}$/;
+    if (!nameRegex.test(query)) {
+        alert("Please enter a valid name (letters, spaces, hyphens, or apostrophes only).");
+        return;
+    }
+
     try {
-        const searchUrl = `${BASE_URL}/search/person?api_key=${APIKEY}&query=${encodeURIComponent(query)}`;
+        const searchUrl = `${BASE_URL}?query=${encodeURIComponent(query)}&role=${selectedRole}`;
         const response = await fetch(searchUrl);
+        console.log('[Frontend] Fetching search with:', searchUrl);
         const searchData = await response.json();
 
         if (!searchData.results || searchData.results.length === 0) {
@@ -82,11 +88,12 @@ function displayPerson(person) {
 
 async function getFilmography(personId, roleKey) {
     const jobCriteria = roleJobMap[roleKey];
-    const creditsUrl = `${BASE_URL}/person/${personId}/combined_credits?api_key=${APIKEY}`;
+    const creditsUrl = `${BASE_URL}/credits?personId=${personId}&role=${roleKey}`;
 
     try {
         filmographyContainer.style.display = 'none';
         const response = await fetch(creditsUrl);
+        console.log('[Frontend] Fetching credits with:', creditsUrl);
         const data = await response.json();
 
         let filteredCredits = [];

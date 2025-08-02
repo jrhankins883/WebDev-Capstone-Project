@@ -1,14 +1,9 @@
-// DO NOT FORGET TO REMOVE API KEY !!!!!!!!!!!!!!!!!!!!!!!!
-const BASE_URL = 'https://api.themoviedb.org/3/discover/movie';
-
 document.querySelectorAll('.genre-btn').forEach(button => {
     button.addEventListener('click', async () => {
         const genreID = button.getAttribute('data-genre-id');
-        const page = Math.floor(Math.random() * 20) + 1;
-        const url = `${BASE_URL}?api_key=${APIKEY}&with_genres=${genreID}&page=${page}`;
-
+        
         try {
-            const response = await fetch(url);
+            const response = await fetch(`/api/random?genre=${genreID}`);
             const data = await response.json();
             const firstFive = data.results.slice(0, 5);
             const resultContainer = document.getElementById('results');
@@ -27,7 +22,7 @@ document.querySelectorAll('.genre-btn').forEach(button => {
                 movieCard.innerHTML = `
                     <img src="${posterPath}" alt="${movie.title} poster"/>
                     <p>${movie.title}</p>
-                    `;
+                `;
 
                 resultContainer.appendChild(movieCard);
             });
