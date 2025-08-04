@@ -1,5 +1,5 @@
 html {
-    background-image: url('/images/theater-screen.jpg'); 
+    background-image: url('../images/theater-screen.jpg'); 
     background-size: cover;
     background-position: center;
     height: 100vh;
