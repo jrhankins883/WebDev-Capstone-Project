@@ -2,14 +2,26 @@ html {
     background-image: url('../images/theater-screen.jpg'); 
     background-size: cover;
     background-position: center;
-    height: 100vh;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 header {
     text-align: center;
-    margin-top: 200px;
-    margin-bottom: 180px;
-    margin-right: 20px;
+    margin-top: 5.5rem;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 h1 {
@@ -17,7 +29,7 @@ h1 {
     font-size: 9rem;
     font-optical-sizing: auto;
     font-style: normal;
-    font-weight: 300px;
+    font-weight: bold;
     margin-bottom: 0px;
 }
 
@@ -32,26 +44,108 @@ header p {
 
 .bttn-and-descrip {
     display: flex;
-    justify-content: space-around;
-    gap: 1rem;
-    padding: 3rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6rem;
+    padding: 0 2rem;
+    width: 100%;
+    max-width: 1200px;
 }
 
 button {
+    background-color: black;
+    color: red;
+    font-weight: bold;
+    font-size: 1.5rem;
     padding: 1rem;
-    border-radius: 1rem;
-    background: #C0C0C0;
+    width: 90%;
+    height: 80%;
+    max-width: 140px;
+    margin-bottom: 1.5rem;
+    border: 2px solid black;
+    border-radius: 6px;
+    box-shadow: inset 0 0 5px lightslategray;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.button-1, .button-2, .button-3 {
+button:hover {
+    transform: scale(1.02);
+    background-color: #999;
+}
+
+.button-1, .button-2 {
+    position: relative;
+    width: 170px;
+    height: 330px;
+    background: linear-gradient(to bottom, #660000, #300000);
+    border: 3px solid #8b0000;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 45rem;
+    margin-left: -2rem;
+    transition: transform 0.3s ease;
+}
+
+.exit-sign {
+    position: absolute;
+    top: -1rem;
+    font-family: 'Orbitron', sans-serif;
+    color: red;
+    background-color: black;
+    padding: 0.3rem 1rem;
+    font-size: 1rem;
     border: 2px solid red;
-    border-radius: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 12px red;
     text-align: center;
-    padding: 1.5rem;
-    color: #f5f5f5;	
-    background: radial-gradient( 
-      hsla(0, 90%, 45%, 1) 0%,
-      hsla(359, 73%, 39%, 1) 50%, 
-      hsla(0, 3%, 8%, 1) 100%
-    );
+    width: fit-content;
+}
+
+@media (max-width: 768px) {
+    header {
+        margin-top: 2rem;
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    header p {
+        font-size: 1.2rem;
+        padding: 0 1rem;
+    }
+
+    .bttn-and-descrip {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        padding: 0 1rem;
+        margin-top: 2rem;
+    }
+
+    .button-1, .button-2 {
+        margin: 0;
+        width: 80%;
+        height: auto;
+        max-width: 300px;
+    }
+
+    button {
+        font-size: 1.2rem;
+        padding: 0.75rem;
+        width: 100%;
+        height: auto;
+        max-width: none;
+    }
+
+    .exit-sign {
+        top: -0.5rem;
+        font-size: 0.9rem;
+        padding: 0.2rem 0.8rem;
+    }
 }

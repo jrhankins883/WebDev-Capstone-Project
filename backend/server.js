@@ -33,12 +33,32 @@ app.get('/api/random', async (req, res) => {
     const page = Math.floor(Math.random() * 20) + 1;
 
     try {
-        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.APIKEY}&with_genres=${genreID}&page=${page}`);
+        const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genreID}&page=${page}`);
         const data = await response.json();
         res.json(data);
     } catch (err) {
         console.error('Error fetching random picks:', err);
         res.status(500).json({ error: 'Failed to fetch random movies' });
+    }
+});
+
+app.get('/api/credits', async (req, res) => {
+    const personId = req.query.personId;
+    const role = req.query.role;
+
+    if (!personId || !role) {
+        return res.status(400).json({ error: 'Missing personId or role parameter' });
+    }
+
+    const url = `https://api.themoviedb.org/3/person/${personId}/combined_credits?api_key=${apiKey}`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        res.json(data);
+    } catch (err) {
+        console.error('Error fetching credits from TMDb:', err);
+        res.status(500).json({ error: 'Failed to fetch credits from TMDb' });
     }
 });
 
@@ -51,3 +71,4 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+

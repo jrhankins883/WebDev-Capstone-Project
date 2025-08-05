@@ -1,4 +1,5 @@
 const BASE_URL = 'http://localhost:3000/api/search';
+const CREDITS_URL = 'http://localhost:3000/api/credits';
 
 const roleJobMap = {
     acting: 'cast',
@@ -88,7 +89,7 @@ function displayPerson(person) {
 
 async function getFilmography(personId, roleKey) {
     const jobCriteria = roleJobMap[roleKey];
-    const creditsUrl = `${BASE_URL}/credits?personId=${personId}&role=${roleKey}`;
+    const creditsUrl = `${CREDITS_URL}?personId=${personId}&role=${roleKey}`;
 
     try {
         filmographyContainer.style.display = 'none';
