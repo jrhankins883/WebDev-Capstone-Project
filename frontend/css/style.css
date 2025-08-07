@@ -1,15 +1,16 @@
-html {
-    background-image: url('../images/theater-screen.jpg'); 
-    background-size: cover;
-    background-position: center;
+html, body {
     height: 100%;
-    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    background-image: url('../images/theater-screen.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 header {
@@ -21,7 +22,6 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
 h1 {
@@ -50,6 +50,7 @@ header p {
     padding: 0 2rem;
     width: 100%;
     max-width: 1200px;
+    margin-top: -10rem;
 }
 
 button {
@@ -58,7 +59,6 @@ button {
     font-weight: bold;
     font-size: 1.5rem;
     padding: 1rem;
-    width: 90%;
     height: 80%;
     max-width: 140px;
     margin-bottom: 1.5rem;
@@ -86,9 +86,15 @@ button:hover {
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    margin-bottom: 45rem;
-    margin-left: -2rem;
     transition: transform 0.3s ease;
+}
+
+.button-1 {
+  margin-left: -2rem;
+}
+
+.button-2 {
+  margin-left: 0;
 }
 
 .exit-sign {
@@ -108,39 +114,42 @@ button:hover {
 
 @media (max-width: 768px) {
     header {
-        margin-top: 2rem;
+        margin-top: 15rem; 
+        padding: 0 1rem;
     }
 
     h1 {
-        font-size: 4rem;
+        font-size: 3.2rem;
     }
 
     header p {
-        font-size: 1.2rem;
-        padding: 0 1rem;
+        font-size: 1rem;
     }
 
     .bttn-and-descrip {
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
-        padding: 0 1rem;
-        margin-top: 2rem;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-top: 5rem;
     }
 
-    .button-1, .button-2 {
-        margin: 0;
-        width: 80%;
-        height: auto;
-        max-width: 300px;
+    .button-1,
+    .button-2 {
+        width: 50%;
+        max-width: 140px;
+        height: 150px;
+    }
+
+    .button-1 {
+        margin-left: 0rem;
     }
 
     button {
         font-size: 1.2rem;
         padding: 0.75rem;
         width: 100%;
+        max-width: 240px;
         height: auto;
-        max-width: none;
     }
 
     .exit-sign {
