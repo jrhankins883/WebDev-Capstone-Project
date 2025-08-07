@@ -1,3 +1,5 @@
+const resultContainer = document.getElementById('results');
+
 document.querySelectorAll('.genre-btn').forEach(button => {
     button.addEventListener('click', async () => {
         const genreID = button.getAttribute('data-genre-id');
@@ -6,9 +8,9 @@ document.querySelectorAll('.genre-btn').forEach(button => {
             const response = await fetch(`/api/random?genre=${genreID}`);
             const data = await response.json();
             const firstFive = data.results.slice(0, 5);
-            const resultContainer = document.getElementById('results');
             resultContainer.style.display = 'flex';
             resultContainer.innerHTML = '';
+
 
             firstFive.forEach((movie, index) => {
                 const movieCard = document.createElement('div');

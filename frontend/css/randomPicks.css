@@ -88,6 +88,31 @@ header h1 {
     gap: 1rem;
 }
 
+footer.footer-buttons {
+    display: flex;
+    margin-top: 1rem;
+    margin-left: 13.5rem; 
+}
+
+.nav-btn {
+    background-color: #1a1a1a;
+    color: #ffcc00;
+    border: 2px solid #ffcc00;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 0 8px rgba(255, 204, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: #ffcc00;
+    color: #1a1a1a;
+    box-shadow: 0 0 12px #ffcc00;
+}
+
 .movie-card {
     margin: auto;
     padding: 1rem;
@@ -119,7 +144,7 @@ header h1 {
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
-        margin-left: 5rem;
+        margin-left: 2rem;
         padding: 0.5rem;
     }
 
