@@ -33,6 +33,21 @@ a certain kind of movie yet cannot decide on something to watch (myself included
 ![Shuffle and Watch - After](./screenshots/randomPicks-after.png)
 This is an example of what the page will look like when a user has clicked on a genre of their choice and receive five randomly selected movies. When a user clicks a genre button, the frontend sends a request to 
 the backend with the selected genre ID. The backend then calls the TMDb “Discover” endpoint using the genre filter to retrieve movies. The backend filters the genre, fetches results, and returns a randomized list 
-of 5 movies using Math.random(). These results are dynamically rendered on the page with their poster and title. The frontend dynamically renders these results using DOM manipulation, displaying each movie’s poster 
-and title in styled cards.
+of 5 movies using Math.random(). These results are dynamically rendered on the page with their poster and title. The frontend dynamically renders these results using DOM manipulation, displaying each movie’s poster and title in styled cards.
 
+## Capstone Requirements
+1. *Analyze data that is stored in arrays, objects, sets or maps and display information about it in your app* - The filmography data retrieved from the TMDb API is returned as arrays of credits. My backend and frontend both work together to filter and extract the relevant results (cast, directing, screenwriting) based on the selected role. The filtered data is displayed dynamically on the page.
+2. *Use a regular expression to validate user input and either prevent the invalid input or inform the user about it (in all cases prevent invalid input from being stored or saved)* - User input for the search form is validated using a regular expression to ensure it contains only valid characters (letters, spaces, dashes, etc). If the input doesn't match the regex, an alert is triggered and the search is prevented, ensuring clean data is sent to the backend.
+3. *Create a function that accepts two or more input parameters and returns a value that is calculated or determined by the inputs.  Basic math functions don’t count (e.g. addition, etc)* - I created an async function called getFilmography(personId, roleKey) that accepts a person’s TMDb ID and the selected role (Actor, Director, or Writer). It fetches that person’s filmography, filters the data based on the role, and dynamically displays it. This function includes conditional logic, array filtering, date sorting, and DOM updates based on the input parameters.
+4. *Create a node.js web server using a modern framework such as Express.js* - I built a Node.js backend using the Express.js framework. The backend handles routing, forwards search queries to the TMDb API, filters data based on user input, and returns results to the frontend. This also helps protect my API key (which I admittedly kept forgetting about and pushing onto GitHub - a big reason why I moved to a backend) and organize the logic outside of the client-side code.
+
+## Setup
+My project isn't deployed live but it can be ran locally in a few easy steps.
+
+### Prerequisites
+1. [Node.js](https://nodejs.org) - Make sure Node.js is installed on your computer.
+2. A [TMDb API key](https://www.themoviedb.org/documentation/api) is also needed in order to retrieve the necessary data.
+
+### Installation
+1. **Clone the repository**
+`git clone`
