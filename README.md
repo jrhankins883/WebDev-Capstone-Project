@@ -7,6 +7,16 @@ coding was just a hobby.
 
 I hope you enjoy my little "movie geek" website!
 
+## Features
+-  Search for entertainers by role: Actor/Actress, Director, or Screenwriter
+-  View profile images and dynamically loaded filmographies
+-  Filter TMDb data based on selected role
+-  Get 5 random movie recommendations by genre
+-  Fully responsive design with custom styling
+-  Secure backend API setup using Express.js and .env variables
+-  Input validation using regular expressions
+-  Organized frontend/backend project structure
+
 ## Project Organization
 ### Homepage
 ![Homepage](./screenshots/homepage.png)
@@ -50,4 +60,36 @@ My project isn't deployed live but it can be ran locally in a few easy steps.
 
 ### Installation
 1. **Clone the repository**
-`git clone`
+```bash
+git clone https://github.com/jrhankins883/WebDev-Capstone-Project
+```
+2. **Navigate to the backend folder**
+```bash
+cd backend
+```
+3. **Install dependencies**
+```bash
+npm install
+```
+4. **Create a `.env` file in the `backend` folder with the following:**
+```env
+APIKEY=your_api_key_here
+PORT=3000
+```
+5. **Start the backend server:**
+This project uses [Nodemon](https://github.com/remy/nodemon) during development to automatically restart the server when code changes. If you don’t have Nodemon installed globally, you can use:
+```bash
+npx nodemon server.js
+```
+6. **Open the app in your browser:**
+Once the backend server is running, open your browser and go to:
+```bash
+http://localhost:3000
+```
+
+## That's a Wrap!
+---
+
+Thanks for checking out **REELPLAY**! This project was built as my final capstone project for the Code: You Web Development course. I hope you enjoy exploring it as much as I enjoyed building it!
+
+– John Hankins 
