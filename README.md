@@ -73,7 +73,7 @@ This project uses [Nodemon](https://github.com/remy/nodemon) during development 
 npx nodemon server.js
 ```
 6. **Open the app in your browser:**
-Once the backend server is running, open your browser and go to:
+Once the backend server is running, you can CTRL+click on the localhost link in the terminal or open your browser and go to:
 ```bash
 http://localhost:3000
 ```
